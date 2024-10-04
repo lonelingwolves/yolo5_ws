@@ -1,0 +1,21 @@
+# Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
+path: /home/parkminseo/yolo_ws/src/yolo5_ros/src/yolov5/datasets  # 데이터셋의 루트 디렉토리
+train: train/images  # 학습 이미지 경로 (루트 디렉토리 기준)
+val: val/images  # 검증 이미지 경로 (루트 디렉토리 기준)
+test: test/images  # 테스트 이미지 경로 (선택 사항)
+
+# Classes
+names:
+  0: yellow_cone  # 클래스 0: 노란색 라바콘
+  1: blue_cone  # 클래스 1: 파란색 라바콘
+
+# Download script/URL (optional)
+download: |
+  from utils.general import download, Path
+
+  dir = Path(yaml['path'])  # dataset root dir
+
+  # 데이터셋이 필요한 경우 다운로드 링크 추가 가능 (선택 사항)
+  urls = ['http://example.com/train.zip',  # 학습 데이터셋 URL
+          'http://example.com/val.zip']  # 검증 데이터셋 URL
+  download(urls, dir=dir / 'images', threads=3)

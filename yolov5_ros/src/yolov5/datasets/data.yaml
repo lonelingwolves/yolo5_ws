@@ -1,0 +1,13 @@
+train: /home/ajoucar/yolo_ws/src/yolov5_ros/src/yolov5/datasets/train/images
+val: /home/ajoucar/yolo_ws/src/yolov5_ros/src/yolov5/datasets/valid/images
+test: /home/ajoucar/yolo_ws/src/yolov5_ros/src/yolov5/datasets/test/images
+
+nc: 2
+names: ['coneB', 'coneY']
+
+roboflow:
+  workspace: aaaa-3ehc8
+  project: trk-enoc
+  version: 2
+  license: Public Domain
+  url: https://universe.roboflow.com/aaaa-3ehc8/trk-enoc/dataset/2

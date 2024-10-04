@@ -1,0 +1,134 @@
+<launch>
+    <!-- 왼쪽 카메라: 라바콘 탐지 -->
+    <arg name="weights_left" default="$(find yolov5_ros)/src/yolov5/runs/train/exp4/weights/best.pt" />
+    <arg name="data_left" default="$(find yolov5_ros)/src/yolov5/datasets/data.yaml" />
+    <arg name="confidence_threshold_left" default="0.75" />
+    <arg name="iou_threshold_left" default="0.45" />
+    <arg name="maximum_detections_left" default="1000" />
+    <arg name="device_left" default="cuda:0" />
+    <arg name="agnostic_nms_left" default="true" />
+    <arg name="line_thickness_left" default="3" />
+    <arg name="dnn_left" default="true" />
+    <arg name="half_left" default="false" />
+    <arg name="view_image_left" default="false" />
+    <arg name="publish_image_left" default="true" />
+
+    <!-- 왼쪽 이미지 크기 설정 -->
+    <arg name="inference_size_h_left" default="640" />
+    <arg name="inference_size_w_left" default="640" />
+
+    <!-- 왼쪽 카메라 입력 및 출력 토픽 -->
+    <arg name="input_image_topic_left" default="/left_cam/image_raw" />
+    <arg name="output_topic_left" default="/yolov5/detections_left" />
+    <arg name="output_image_topic_left" default="/yolov5/image_out_left" />
+
+    <!-- 오른쪽 카메라: 라바콘 탐지 -->
+    <arg name="weights_right" default="$(find yolov5_ros)/src/yolov5/runs/train/exp4/weights/best.pt" />
+    <arg name="data_right" default="$(find yolov5_ros)/src/yolov5/datasets/data.yaml" />
+    <arg name="confidence_threshold_right" default="0.75" />
+    <arg name="iou_threshold_right" default="0.45" />
+    <arg name="maximum_detections_right" default="1000" />
+    <arg name="device_right" default="cuda:0" />
+    <arg name="agnostic_nms_right" default="true" />
+    <arg name="line_thickness_right" default="3" />
+    <arg name="dnn_right" default="true" />
+    <arg name="half_right" default="false" />
+    <arg name="view_image_right" default="false" />
+    <arg name="publish_image_right" default="true" />
+
+    <!-- 오른쪽 이미지 크기 설정 -->
+    <arg name="inference_size_h_right" default="640" />
+    <arg name="inference_size_w_right" default="640" />
+
+    <!-- 오른쪽 카메라 입력 및 출력 토픽 -->
+    <arg name="input_image_topic_right" default="/right_cam/image_raw" />
+    <arg name="output_topic_right" default="/yolov5/detections_right" />
+    <arg name="output_image_topic_right" default="/yolov5/image_out_right" />
+
+    <!-- 가운데 카메라: 노란색 라바콘 탐지 -->
+    <arg name="weights_mid" default="$(find yolov5_ros)/src/yolov5/runs/train/exp4/weights/best.pt" />
+    <arg name="data_mid" default="$(find yolov5_ros)/src/yolov5/datasets/data.yaml" />
+    <arg name="confidence_threshold_mid" default="0.75" />
+    <arg name="iou_threshold_mid" default="0.45" />
+    <arg name="maximum_detections_mid" default="1000" />
+    <arg name="device_mid" default="cuda:0" />
+    <arg name="agnostic_nms_mid" default="true" />
+    <arg name="line_thickness_mid" default="3" />
+    <arg name="dnn_mid" default="true" />
+    <arg name="half_mid" default="false" />
+    <arg name="view_image_mid" default="false" />
+    <arg name="publish_image_mid" default="true" />
+
+    <!-- 가운데 이미지 크기 설정 -->
+    <arg name="inference_size_h_mid" default="640" />
+    <arg name="inference_size_w_mid" default="640" />
+
+    <!-- 가운데 카메라 입력 및 출력 토픽 -->
+    <arg name="input_image_topic_mid" default="/usb_cam/image_raw" />
+    <arg name="output_topic_mid" default="/yolov5/detections_mid" />
+    <arg name="output_image_topic_mid" default="/yolov5/image_out_mid" />
+
+    <!-- 왼쪽 카메라 노드 실행 (노란색 라바콘 탐지) -->
+    <node pkg="yolov5_ros" name="detect_left" type="detect_one_image.py" output="screen">
+        <param name="weights" value="$(arg weights_left)" />
+        <param name="data" value="$(arg data_left)" />
+        <param name="confidence_threshold" value="$(arg confidence_threshold_left)" />
+        <param name="iou_threshold" value="$(arg iou_threshold_left)" />
+        <param name="maximum_detections" value="$(arg maximum_detections_left)" />
+        <param name="device" value="$(arg device_left)" />
+        <param name="agnostic_nms" value="$(arg agnostic_nms_left)" />
+        <param name="line_thickness" value="$(arg line_thickness_left)" />
+        <param name="dnn" value="$(arg dnn_left)" />
+        <param name="half" value="$(arg half_left)" />
+        <param name="view_image" value="$(arg view_image_left)" />
+        <param name="publish_image" value="$(arg publish_image_left)" />
+        <param name="inference_size_h" value="$(arg inference_size_h_left)" />
+        <param name="inference_size_w" value="$(arg inference_size_w_left)" />
+        <param name="input_image_topic" value="$(arg input_image_topic_left)" />
+        <param name="output_topic" value="$(arg output_topic_left)" />
+        <param name="output_image_topic" value="$(arg output_image_topic_left)" />
+    </node>
+
+    <!-- 오른쪽 카메라 노드 실행 (파란색 라바콘 탐지) -->
+    <node pkg="yolov5_ros" name="detect_right" type="detect_one_image.py" output="screen">
+        <param name="weights" value="$(arg weights_right)" />
+        <param name="data" value="$(arg data_right)" />
+        <param name="confidence_threshold" value="$(arg confidence_threshold_right)" />
+        <param name="iou_threshold" value="$(arg iou_threshold_right)" />
+        <param name="maximum_detections" value="$(arg maximum_detections_right)" />
+        <param name="device" value="$(arg device_right)" />
+        <param name="agnostic_nms" value="$(arg agnostic_nms_right)" />
+        <param name="line_thickness" value="$(arg line_thickness_right)" />
+        <param name="dnn" value="$(arg dnn_right)" />
+        <param name="half" value="$(arg half_right)" />
+        <param name="view_image" value="$(arg view_image_right)" />
+        <param name="publish_image" value="$(arg publish_image_right)" />
+        <param name="inference_size_h" value="$(arg inference_size_h_right)" />
+        <param name="inference_size_w" value="$(arg inference_size_w_right)" />
+        <param name="input_image_topic" value="$(arg input_image_topic_right)" />
+        <param name="output_topic" value="$(arg output_topic_right)" />
+        <param name="output_image_topic" value="$(arg output_image_topic_right)" />
+    </node>
+
+        <!-- 가운데 카메라 노드 실행 (노란색 라바콘 탐지) -->
+    <node pkg="yolov5_ros" name="detect_mid" type="detect_one_image.py" output="screen">
+        <param name="weights" value="$(arg weights_mid)" />
+        <param name="data" value="$(arg data_mid)" />
+        <param name="confidence_threshold" value="$(arg confidence_threshold_mid)" />
+        <param name="iou_threshold" value="$(arg iou_threshold_mid)" />
+        <param name="maximum_detections" value="$(arg maximum_detections_mid)" />
+        <param name="device" value="$(arg device_mid)" />
+        <param name="agnostic_nms" value="$(arg agnostic_nms_mid)" />
+        <param name="line_thickness" value="$(arg line_thickness_mid)" />
+        <param name="dnn" value="$(arg dnn_mid)" />
+        <param name="half" value="$(arg half_mid)" />
+        <param name="view_image" value="$(arg view_image_mid)" />
+        <param name="publish_image" value="$(arg publish_image_mid)" />
+        <param name="inference_size_h" value="$(arg inference_size_h_mid)" />
+        <param name="inference_size_w" value="$(arg inference_size_w_mid)" />
+        <param name="input_image_topic" value="$(arg input_image_topic_mid)" />
+        <param name="output_topic" value="$(arg output_topic_mid)" />
+        <param name="output_image_topic" value="$(arg output_image_topic_mid)" />
+    </node>
+
+</launch>
